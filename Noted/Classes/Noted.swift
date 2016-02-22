@@ -1,6 +1,5 @@
 //
-//  NotificationCenter.swift
-//  yPinion
+//  Noted.swift
 //
 //  Created by Kasper Welner on 09/03/15.
 //  Copyright (c) 2015 Nodes. All rights reserved.
@@ -8,13 +7,13 @@
 
 import Foundation
 
-public protocol NONotification {
-    func trigger(reciever:AnyObject)
+public protocol Notification {
+    func trigger(reciever: AnyObject)
 }
 
-public class NotificationCenter {
+public class Noted {
     
-    public static let defaultCenter = NotificationCenter()
+    public static let defaultInstance = Noted()
     
     var receivers = NSHashTable(options: NSPointerFunctionsOptions.WeakMemory)
     
@@ -26,7 +25,7 @@ public class NotificationCenter {
         receivers.removeObject(observer)
     }
     
-    public func postNotification(notification:NONotification) {
+    public func postNotification(notification: Notification) {
         for receiver in receivers.allObjects {
             notification.trigger(receiver)
         }

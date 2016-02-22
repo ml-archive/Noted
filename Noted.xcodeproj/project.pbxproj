@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		272F1E161C6A4A250098F620 /* Noted.h in Headers */ = {isa = PBXBuildFile; fileRef = 272F1E151C6A4A250098F620 /* Noted.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0135E62C1C7B5A6F007982E1 /* Noted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135E6281C7B5A6F007982E1 /* Noted.swift */; };
+		0135E62D1C7B5A6F007982E1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0135E62A1C7B5A6F007982E1 /* Info.plist */; };
+		0135E62E1C7B5A6F007982E1 /* Noted.h in Headers */ = {isa = PBXBuildFile; fileRef = 0135E62B1C7B5A6F007982E1 /* Noted.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		272F1E1D1C6A4A250098F620 /* Noted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272F1E121C6A4A250098F620 /* Noted.framework */; };
 		272F1E221C6A4A250098F620 /* NotedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272F1E211C6A4A250098F620 /* NotedTests.swift */; };
-		272F1E2D1C6A4A450098F620 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272F1E2C1C6A4A450098F620 /* NotificationCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,13 +25,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0135E6281C7B5A6F007982E1 /* Noted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Noted.swift; sourceTree = "<group>"; };
+		0135E62A1C7B5A6F007982E1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0135E62B1C7B5A6F007982E1 /* Noted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noted.h; sourceTree = "<group>"; };
 		272F1E121C6A4A250098F620 /* Noted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Noted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		272F1E151C6A4A250098F620 /* Noted.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Noted.h; sourceTree = "<group>"; };
-		272F1E171C6A4A250098F620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		272F1E1C1C6A4A250098F620 /* NotedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		272F1E211C6A4A250098F620 /* NotedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotedTests.swift; sourceTree = "<group>"; };
 		272F1E231C6A4A250098F620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		272F1E2C1C6A4A450098F620 /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0135E6271C7B5A6F007982E1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0135E6281C7B5A6F007982E1 /* Noted.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0135E6291C7B5A6F007982E1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0135E62A1C7B5A6F007982E1 /* Info.plist */,
+				0135E62B1C7B5A6F007982E1 /* Noted.h */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		272F1E081C6A4A250098F620 = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +91,8 @@
 		272F1E141C6A4A250098F620 /* Noted */ = {
 			isa = PBXGroup;
 			children = (
-				272F1E2C1C6A4A450098F620 /* NotificationCenter.swift */,
-				272F1E151C6A4A250098F620 /* Noted.h */,
-				272F1E171C6A4A250098F620 /* Info.plist */,
+				0135E6271C7B5A6F007982E1 /* Classes */,
+				0135E6291C7B5A6F007982E1 /* Supporting Files */,
 			);
 			path = Noted;
 			sourceTree = "<group>";
@@ -96,7 +113,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				272F1E161C6A4A250098F620 /* Noted.h in Headers */,
+				0135E62E1C7B5A6F007982E1 /* Noted.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0135E62D1C7B5A6F007982E1 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				272F1E2D1C6A4A450098F620 /* NotificationCenter.swift in Sources */,
+				0135E62C1C7B5A6F007982E1 /* Noted.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -299,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,12 +330,13 @@
 		272F1E271C6A4A250098F620 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Noted/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Noted/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nodes.Noted;
@@ -330,12 +349,13 @@
 		272F1E281C6A4A250098F620 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Noted/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Noted/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nodes.Noted;
