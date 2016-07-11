@@ -14,14 +14,20 @@ enum TestNotification {
 }
 
 extension TestNotification: Notification {
-    func trigger(reciever: AnyObject) {
+    func trigger(receiver: AnyObject) {
 //        print(reciever)
+    }
+}
+
+class TestObserver: NotificationObserver {
+    func didReceive(notification: Notification) {
+        
     }
 }
 
 class ThreadSafeTests: XCTestCase {
     
-    var recieverStore : [NSObject] = []
+    var receiverStore : [TestObserver] = []
     var notificationsCount : Int = 0
     
     override func setUp() {
@@ -31,20 +37,22 @@ class ThreadSafeTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
-        self.recieverStore = []
+        self.receiverStore = []
         self.notificationsCount = 0
     }
     
     func testThreadSafe() {
         
         for index in 0...300 {
-            let controller = NSObject()
-            recieverStore.append(recieverStore)
-            let queue = dispatch_queue_create("com.noted.queue.\(index)", nil)
-            dispatch_async(queue, {
+            let controller = TestObserver()
+            receiverStore.append(controller)
+            let queue = DispatchQueue(label:"com.noted.queue.\(index)")
+            queue.async {
                 Noted.defaultInstance.addObserver(controller)
                 Noted.defaultInstance.postNotification(TestNotification.TestUpdated)
-            })
+
+            }
+            
         }
         XCTAssert(true)
     }
