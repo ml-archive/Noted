@@ -7,32 +7,32 @@
 
 import Foundation
 
-public protocol NotificationObserver : AnyObject {
-    func didReceive(notification: Notification)
+public protocol NoteObserver: AnyObject {
+    func didReceive(note: NoteType)
 }
 
-public protocol Notification {
+public protocol NoteType {
     func trigger(_ receiver: AnyObject)
 }
 
-public protocol NotificationFilter {
-    func shouldFilter(notification:Notification) -> Bool
+public protocol NoteFilter {
+    func shouldFilter(note: NoteType) -> Bool
 }
 
-internal struct PassthroughNotificationFilter : NotificationFilter {
-    internal func shouldFilter(notification:Notification) -> Bool {
+internal struct PassthroughNoteFilter: NoteFilter {
+    internal func shouldFilter(note: NoteType) -> Bool {
         return false
     }
 }
 
-private func ==(lhs: NotificationObserverInfo, rhs: NotificationObserverInfo) -> Bool { return lhs.receiver === rhs.receiver }
+private func ==(lhs: NoteObserverInfo, rhs: NoteObserverInfo) -> Bool { return lhs.receiver === rhs.receiver }
 
-private final class NotificationObserverInfo: AnyObject, Equatable {
+private final class NoteObserverInfo: AnyObject, Equatable {
     
-    let receiver:NotificationObserver
-    let filter:NotificationFilter
+    let receiver: NoteObserver
+    let filter:NoteFilter
     
-    required init(receiver:NotificationObserver, filter: NotificationFilter) {
+    required init(receiver: NoteObserver, filter: NoteFilter) {
         self.receiver = receiver
         self.filter = filter
     }
@@ -42,23 +42,25 @@ public class Noted {
     
     public static let defaultInstance = Noted()
     
+
     private let notedQueue = DispatchQueue(label: "com.nodes.noted", attributes: .concurrent)
     
-    private var _observers = NSHashTable<NotificationObserverInfo>(options: .weakMemory)
+    private var _observers = NSHashTable<NoteObserverInfo>(options: .weakMemory)
     
-    public var receivers : [NotificationObserver] {
+    public var receivers : [NoteObserver] {
         return _observers.allObjects.map {$0.receiver}
     }
     
+
     private init() {}
     
-    public func addObserver(_ observer: NotificationObserver, filter: NotificationFilter = PassthroughNotificationFilter()) {
+    public func addObserver(_ observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
-            self._observers.add(NotificationObserverInfo(receiver: observer, filter: filter))
+            self._observers.add(NoteObserverInfo(receiver: observer, filter: filter))
         }
     }
     
-    public func removeObserver(_ observer: NotificationObserver) {
+    public func removeObserver(_ observer: NoteObserver) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
             if let foundEntry = (self._observers.allObjects).first(where: {$0.receiver === observer}) {
                 self._observers.remove(foundEntry)
@@ -66,14 +68,15 @@ public class Noted {
         }
     }
     
-    public func postNotification(_ notification: Notification) {
+    public func postNote(_ note: NoteType) {
         notedQueue.async {
             for receiver in self._observers.allObjects {
-                if !receiver.filter.shouldFilter(notification:notification) {
+                if !receiver.filter.shouldFilter(note:note) {
                     DispatchQueue.main.async {
-                        notification.trigger(receiver)
+                        note.trigger(receiver)
                     }
                 }
+
             }
         }
     }
