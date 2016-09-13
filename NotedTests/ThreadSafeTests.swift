@@ -13,14 +13,14 @@ enum TestNotification {
     case TestUpdated
 }
 
-extension TestNotification: Notification {
-    func trigger(receiver: AnyObject) {
+extension TestNotification: NoteType {
+    func trigger(_ receiver: AnyObject) {
 //        print(reciever)
     }
 }
 
-class TestObserver: NotificationObserver {
-    func didReceive(notification: Notification) {
+class TestObserver: NoteObserver {
+    func didReceive(note: NoteType) {
         
     }
 }
@@ -49,7 +49,7 @@ class ThreadSafeTests: XCTestCase {
             let queue = DispatchQueue(label:"com.noted.queue.\(index)")
             queue.async {
                 Noted.defaultInstance.addObserver(controller)
-                Noted.defaultInstance.postNotification(TestNotification.TestUpdated)
+                Noted.defaultInstance.postNote(TestNotification.TestUpdated)
 
             }
             
