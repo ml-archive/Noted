@@ -42,7 +42,6 @@ public class Noted {
     
     public static let defaultInstance = Noted()
     
-
     private let notedQueue = DispatchQueue(label: "com.nodes.noted", attributes: .concurrent)
     
     private var _observers = NSHashTable<NoteObserverInfo>(options: .weakMemory)
@@ -51,16 +50,15 @@ public class Noted {
         return _observers.allObjects.map {$0.receiver}
     }
     
-
     private init() {}
     
-    public func addObserver(_ observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
+    public func add(observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
             self._observers.add(NoteObserverInfo(receiver: observer, filter: filter))
         }
     }
     
-    public func removeObserver(_ observer: NoteObserver) {
+    public func remove(observer: NoteObserver) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
             if let foundEntry = (self._observers.allObjects).first(where: {$0.receiver === observer}) {
                 self._observers.remove(foundEntry)
@@ -68,7 +66,7 @@ public class Noted {
         }
     }
     
-    public func postNote(_ note: NoteType) {
+    public func post(note: NoteType) {
         notedQueue.async {
             for receiver in self._observers.allObjects {
                 if !receiver.filter.shouldFilter(note:note) {

@@ -48,8 +48,8 @@ class ThreadSafeTests: XCTestCase {
             receiverStore.append(controller)
             let queue = DispatchQueue(label:"com.noted.queue.\(index)")
             queue.async {
-                Noted.defaultInstance.addObserver(controller)
-                Noted.defaultInstance.postNote(TestNotification.TestUpdated)
+                Noted.defaultInstance.add(observer: controller)
+                Noted.defaultInstance.post(note: TestNotification.TestUpdated)
 
             }
             
