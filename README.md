@@ -21,4 +21,4 @@ github "nodes-ios/Noted"
 Made with ❤️ at [Nodes](http://nodesagency.com).
 
 ## 📄 License
-**Noted** is available under the MIT license. See the [LICENSE](https://github.com/nodes-ios/Nodes/blob/master/LICENSE) file for more info.
+**Noted** is available under the MIT license. See the [LICENSE](https://github.com/nodes-ios/Noted/blob/master/LICENSE) file for more info.
