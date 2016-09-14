@@ -1,8 +1,4 @@
-<p align="center">
-Noted
-</p>
-
-Notifications made simpler.
+The observer pattern made Swiftier and easy to use.
 
 ## 📝 Requirements
 
@@ -13,9 +9,12 @@ Notifications made simpler.
 
 ### Carthage
 ~~~
-github "nodes-ios/Noted" 
+github "nodes-ios/Noted"
 ~~~
 
+## 💻 Usage
+
+> TODO: Add usage instructions
 
 ## 👥 Credits
 Made with ❤️ at [Nodes](http://nodesagency.com).
