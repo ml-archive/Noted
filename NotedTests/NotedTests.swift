@@ -10,27 +10,80 @@ import XCTest
 @testable import Noted
 
 class NotedTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+
+    // Used for having strong reference to objects
+    var receiverStore: [TestObserver] = []
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        Noted.defaultInstance.receivers.removeAllObjects()
+        receiverStore = []
+        TestNotification.testTriggerAction = nil
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+
+    func testAddObserver() {
+        let observer = TestObserver()
+        XCTAssertEqual(Noted.defaultInstance.receivers.count, 0,
+                       "Noted shouldn't contain any receivers by default.")
+
+        Noted.defaultInstance.addObserver(observer)
+
+        let expectation = expectationWithDescription("Noted should contain a receiver after adding it.")
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            XCTAssertEqual(Noted.defaultInstance.receivers.count, 1, "Noted should contain a receiver after adding it.")
+            expectation.fulfill()
         }
+
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
-    
+
+    func testRemoveObserver() {
+        let observer = TestObserver()
+
+        Noted.defaultInstance.addObserver(observer)
+        Noted.defaultInstance.removeObserver(observer)
+
+        let expectation = expectationWithDescription("Noted shouldn't contain a receiver after removing  it.")
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            XCTAssertEqual(Noted.defaultInstance.receivers.count, 0,
+                           "Noted shouldn't contain a receiver after removing  it.")
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
+
+    func testPostNotification() {
+        let observer = TestObserver()
+        let expectation = expectationWithDescription("A notification should be triggered.")
+
+        TestNotification.testTriggerAction = { receiver in
+            XCTAssert(observer === receiver, "The receiver of the notification should be the observer.")
+            expectation.fulfill()
+        }
+
+        Noted.defaultInstance.addObserver(observer)
+        Noted.defaultInstance.postNotification(TestNotification.Test)
+
+        waitForExpectationsWithTimeout(20, handler: nil)
+    }
+
+    func testThreadSafety() {
+        for index in 0...300 {
+            let controller = TestObserver()
+            receiverStore.append(controller)
+
+            let queue = dispatch_queue_create("com.noted.queue.\(index)", nil)
+
+            dispatch_async(queue, {
+                Noted.defaultInstance.addObserver(controller)
+                Noted.defaultInstance.postNotification(TestNotification.Test)
+            })
+        }
+
+        XCTAssert(true)
+    }
 }

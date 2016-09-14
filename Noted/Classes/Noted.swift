@@ -14,12 +14,11 @@ public protocol Notification {
 public class Noted {
     
     public static let defaultInstance = Noted()
-    
-    private let notedQueue = dispatch_queue_create("com.noted.queue", DISPATCH_QUEUE_CONCURRENT)
-    
+
+    private let notedQueue = dispatch_queue_create("com.nodes.queue", DISPATCH_QUEUE_CONCURRENT)
+    internal var receivers = NSHashTable(options: .WeakMemory)
+
     private init() {}
-    
-    var receivers = NSHashTable(options: NSPointerFunctionsOptions.WeakMemory)
     
     public func addObserver(observer: AnyObject) {
         dispatch_barrier_async(notedQueue) { [weak self] in
@@ -34,10 +33,9 @@ public class Noted {
     }
     
     public func postNotification(notification: Notification) {
-        dispatch_async(notedQueue) { [weak self] in
-            for receiver in self?.receivers.allObjects ?? [] {
-                dispatch_async(dispatch_get_main_queue()) { [weak receiver] in
-                    guard let receiver = receiver else { return }
+        dispatch_async(notedQueue) {
+            for receiver in self.receivers.allObjects {
+                dispatch_async(dispatch_get_main_queue()) {
                     notification.trigger(receiver)
                 }
             }
