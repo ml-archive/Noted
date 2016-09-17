@@ -17,7 +17,11 @@ public class Noted {
     internal static let passthroughFilter = PassthroughNoteFilter()
 
     public var observers: [NoteObserver] {
-        return _observers.allObjects.flatMap({ $0 as? NoteObserver })
+        var values: [AnyObject] = []
+        notedQueue.sync {
+            values = self._observers.allObjects
+        }
+        return values.flatMap({ $0 as? NoteObserver })
     }
     
     private init() {}
@@ -40,7 +44,7 @@ public class Noted {
         notedQueue.async {
             for receiver in self.observers.filter({ !$0.noteFilter.shouldFilter(note: note) }) {
                 DispatchQueue.main.async {
-                    note.trigger(receiver)
+                    receiver.didReceive(note: note)
                 }
             }
         }

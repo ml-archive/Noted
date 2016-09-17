@@ -9,14 +9,14 @@
 import Foundation
 import Noted
 
-enum TestNote {
+enum TestNote: NoteType {
     case Test
 }
 
-extension TestNote: NoteType {
-    static var testTriggerAction: ((AnyObject) -> Void)?
+enum TestContextNote: NoteType {
+    case Test
 
-    func trigger(_ receiver: AnyObject) {
-        TestNote.testTriggerAction?(receiver)
+    var context: AnyObject? {
+        return "test context" as AnyObject
     }
 }

@@ -9,5 +9,11 @@
 import Foundation
 
 public protocol NoteType {
-    func trigger(_ receiver: AnyObject)
+    var context: AnyObject? { get }
+}
+
+extension NoteType {
+    public var context: AnyObject? {
+        return nil
+    }
 }

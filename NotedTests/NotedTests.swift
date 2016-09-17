@@ -17,7 +17,6 @@ class NotedTests: XCTestCase {
     override func tearDown() {
         Noted.defaultInstance._observers.removeAllObjects()
         receiverStore = []
-        TestNote.testTriggerAction = nil
         super.tearDown()
     }
 
@@ -52,8 +51,11 @@ class NotedTests: XCTestCase {
         let observer = TestObserver()
         let expect = expectation(description: "A notification should be triggered.")
 
-        TestNote.testTriggerAction = { receiver in
-            XCTAssert(observer === receiver, "The receiver of the notification should be the observer.")
+        observer.noteAction = { note in
+            let test = note as? TestNote
+            XCTAssert(test == TestNote.Test,
+                      "The receiver of the notification should be the observer.")
+            XCTAssertNil(test?.context, "Default note context should be nil .")
             expect.fulfill()
         }
 
