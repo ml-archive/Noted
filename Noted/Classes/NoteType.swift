@@ -8,12 +8,4 @@
 
 import Foundation
 
-public protocol NoteType {
-    var context: AnyObject? { get }
-}
-
-extension NoteType {
-    public var context: AnyObject? {
-        return nil
-    }
-}
+public protocol NoteType { }

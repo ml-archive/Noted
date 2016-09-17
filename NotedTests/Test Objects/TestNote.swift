@@ -12,11 +12,3 @@ import Noted
 enum TestNote: NoteType {
     case Test
 }
-
-enum TestContextNote: NoteType {
-    case Test
-
-    var context: AnyObject? {
-        return "test context" as AnyObject
-    }
-}

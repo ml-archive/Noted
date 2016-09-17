@@ -55,7 +55,6 @@ class NotedTests: XCTestCase {
             let test = note as? TestNote
             XCTAssert(test == TestNote.Test,
                       "The receiver of the notification should be the observer.")
-            XCTAssertNil(test?.context, "Default note context should be nil .")
             expect.fulfill()
         }
 
