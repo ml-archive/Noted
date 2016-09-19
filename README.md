@@ -20,7 +20,13 @@ A minimalistic and effective replacement for `NSNotificationCenter`, that promot
 
 ### Carthage
 ~~~
-github "nodes-ios/Noted" "~> 1.0"
+github "nodes-ios/Noted" " ~> 2.0"
+~~~
+
+For latest Swift 2 version use:
+
+~~~
+github "nodes-ios/Noted" " ~> 1.0"
 ~~~
 
 ## 💻 Usage
@@ -41,7 +47,7 @@ There are two protocols you need to implement in order for *Noted* to work. One 
 
 Just make your object conform to it and that's it!
 
-We recommend using `enum`s as you get most out of Swift and you can associate values without wrapping them in some ugly dictionary with string keys. 
+We recommend using `enum`s as you get most out of Swift and you can associate values without wrapping them in some ugly dictionary with string keys.
 
 ```swift
 enum Note: NoteType {
@@ -102,7 +108,7 @@ func viewWillDisappear() {
 
 #### Posting Notes
 
-Posting notes is as simple as it could get, simply call `post(note: note)` and it will be send momentarily. 
+Posting notes is as simple as it could get, simply call `post(note: note)` and it will be send momentarily.
 
 ```swift
 func buttonPressed() {
@@ -111,11 +117,11 @@ func buttonPressed() {
 ```
 
 
-> **NOTE:** Be advised that Noted uses a background thread and synchronizes post action with addittion and removal of observers. 
+> **NOTE:** Be advised that Noted uses a background thread and synchronizes post action with addittion and removal of observers.
 
 ### Advanced Features
 
-If you send a lot of notifications and have many observers, this section might be useful for you. 
+If you send a lot of notifications and have many observers, this section might be useful for you.
 
 #### Filtering
 
@@ -132,7 +138,7 @@ struct RandomFilter: NoteFilter {
 
 class TestObserver: NoteObserver {
     let noteFilter: NoteFilter = RandomFilter()
-    
+
     func didReceive(note: NoteType) { }
 }
 ```
