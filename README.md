@@ -20,13 +20,11 @@ A minimalistic and effective replacement for `NSNotificationCenter`, that promot
 
 ### Carthage
 ~~~
-github "nodes-ios/Noted" " ~> 2.0"
-~~~
+# Swift 3
+github "nodes-ios/Noted" ~> 2.0
 
-For latest Swift 2 version use:
-
-~~~
-github "nodes-ios/Noted" " ~> 1.0"
+# Swift 2
+github "nodes-ios/Noted" ~> 1.0
 ~~~
 
 ## 💻 Usage
