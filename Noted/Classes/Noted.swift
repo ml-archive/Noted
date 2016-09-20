@@ -7,45 +7,36 @@
 
 import Foundation
 
+public protocol Notification {
+    func trigger(receiver: AnyObject)
+}
+
 public class Noted {
     
     public static let defaultInstance = Noted()
-    
-    private let notedQueue = DispatchQueue(label: "com.nodes.noted", attributes: .concurrent)
-    internal var _observers = NSHashTable<AnyObject>(options: .weakMemory)
 
-    internal static let passthroughFilter = PassthroughNoteFilter()
+    private let notedQueue = dispatch_queue_create("com.nodes.queue", DISPATCH_QUEUE_CONCURRENT)
+    internal var receivers = NSHashTable(options: .WeakMemory)
 
-    public var observers: [NoteObserver] {
-        var values: [AnyObject] = []
-        notedQueue.sync {
-            values = self._observers.allObjects
-        }
-        return values.flatMap({ $0 as? NoteObserver })
-    }
-    
     private init() {}
     
-    public func add(observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
-        notedQueue.async(group: nil, qos: .default, flags: .barrier) {
-            self._observers.add(observer)
+    public func addObserver(observer: AnyObject) {
+        dispatch_barrier_async(notedQueue) { [weak self] in
+            self?.receivers.addObject(observer)
         }
     }
     
-    public func remove(observer: NoteObserver) {
-        notedQueue.async(group: nil, qos: .default, flags: .barrier) {
-            if let foundEntry = (self._observers.allObjects).first(where: {$0 === observer}) {
-                self._observers.remove(foundEntry)
-            }
+    public func removeObserver(observer: AnyObject) {
+        dispatch_barrier_async(notedQueue) { [weak self] in
+            self?.receivers.removeObject(observer)
         }
     }
     
-
-    public func post(note: NoteType) {
-        notedQueue.async {
-            for receiver in self.observers.filter({ !$0.noteFilter.shouldFilter(note: note) }) {
-                DispatchQueue.main.async {
-                    receiver.didReceive(note: note)
+    public func postNotification(notification: Notification) {
+        dispatch_async(notedQueue) {
+            for receiver in self.receivers.allObjects {
+                dispatch_async(dispatch_get_main_queue()) {
+                    notification.trigger(receiver)
                 }
             }
         }

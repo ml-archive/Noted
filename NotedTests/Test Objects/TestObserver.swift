@@ -9,12 +9,5 @@
 import Foundation
 import Noted
 
-
-class TestObserver: NoteObserver {
-    var noteAction: ((NoteType) -> Void)?
-    
-    func didReceive(note: NoteType) {
-        noteAction?(note)
-    }
+class TestObserver {
 }
-
