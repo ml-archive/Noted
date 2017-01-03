@@ -81,6 +81,28 @@ class NotedTests: XCTestCase {
         
         XCTAssert(true)
     }
+    
+    func testFilter() {
+        let notedInstance = Noted()
+        let observer      = TestObserver()
+        let expect        = expectation(description: "Notification should be filtered out.")
+        
+        observer.noteAction = { note in            
+            XCTAssert(false,
+                      "No notification should be received.")
+            
+            notedInstance.remove(observer:observer)
+        }
+        
+        receiverStore.append(observer)
+        
+        notedInstance.add(observer: observer, filter: TestFilter())
+        notedInstance.post(note: TestNote.Test)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { 
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
 }
 
 

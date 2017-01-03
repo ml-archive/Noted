@@ -24,7 +24,7 @@ public class Noted {
         return values.flatMap({ $0 as? NoteObserver })
     }
     
-    private init() {}
+    public init() {}
     
     public func add(observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
