@@ -1,5 +1,11 @@
 # Noted
 
+[![Travis](https://travis-ci.org/nodes-ios/Noted.svg?branch=master)](https://travis-ci.org/nodes-ios/Noted)
+[![Codecov](https://img.shields.io/codecov/c/github/nodes-ios/Noted.svg)](https://codecov.io/github/nodes-ios/Noted)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![Plaform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nodes-ios/Noted/blob/master/LICENSE)
+
 A minimalistic and effective replacement for `NSNotificationCenter`, that promotes the observer pattern and keeps weak references to it's observers.
 
 **Features:**  
