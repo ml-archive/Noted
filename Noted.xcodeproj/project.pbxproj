@@ -16,6 +16,7 @@
 		017E1C891D89AE1200034114 /* TestObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E1C881D89AE1200034114 /* TestObserver.swift */; };
 		272F1E1D1C6A4A250098F620 /* Noted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272F1E121C6A4A250098F620 /* Noted.framework */; };
 		272F1E221C6A4A250098F620 /* NotedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272F1E211C6A4A250098F620 /* NotedTests.swift */; };
+		307F48401E1C6D4E003536A9 /* TestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307F483F1E1C6D4E003536A9 /* TestFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		272F1E1C1C6A4A250098F620 /* NotedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		272F1E211C6A4A250098F620 /* NotedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotedTests.swift; sourceTree = "<group>"; };
 		272F1E231C6A4A250098F620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		307F483F1E1C6D4E003536A9 /* TestFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,12 +84,12 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-
 		017E1C851D89AE0300034114 /* Test Objects */ = {
 			isa = PBXGroup;
 			children = (
 				017E1C861D89AE0C00034114 /* TestNote.swift */,
 				017E1C881D89AE1200034114 /* TestObserver.swift */,
+				307F483F1E1C6D4E003536A9 /* TestFilter.swift */,
 			);
 			path = "Test Objects";
 			sourceTree = "<group>";
@@ -122,7 +124,6 @@
 		272F1E201C6A4A250098F620 /* NotedTests */ = {
 			isa = PBXGroup;
 			children = (
-
 				017E1C851D89AE0300034114 /* Test Objects */,
 				272F1E211C6A4A250098F620 /* NotedTests.swift */,
 				272F1E231C6A4A250098F620 /* Info.plist */,
@@ -252,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				017E1C891D89AE1200034114 /* TestObserver.swift in Sources */,
+				307F48401E1C6D4E003536A9 /* TestFilter.swift in Sources */,
 				272F1E221C6A4A250098F620 /* NotedTests.swift in Sources */,
 				017E1C871D89AE0C00034114 /* TestNote.swift in Sources */,
 			);
