@@ -7,12 +7,16 @@
 //
 
 import Foundation
-import Noted
-
+@testable import Noted
 
 class TestObserver: NoteObserver {
     var noteAction: ((NoteType) -> Void)?
-    
+    let noteFilter: NoteFilter
+
+    init(filter: NoteFilter = PassthroughNoteFilter()) {
+        self.noteFilter = filter
+    }
+
     func didReceive(note: NoteType) {
         noteAction?(note)
     }

@@ -44,7 +44,7 @@ class NotedTests: XCTestCase {
             }
         }
 
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testPostNotification() {
@@ -63,7 +63,7 @@ class NotedTests: XCTestCase {
         Noted.defaultInstance.add(observer: observer)
         Noted.defaultInstance.post(note: TestNote.Test)
 
-        waitForExpectations(timeout: 20, handler: nil)
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testThreadSafety() {
@@ -84,7 +84,7 @@ class NotedTests: XCTestCase {
     
     func testFilter() {
         let notedInstance = Noted()
-        let observer      = TestObserver()
+        let observer      = TestObserver(filter: TestFilter())
         let expect        = expectation(description: "Notification should be filtered out.")
         
         observer.noteAction = { note in            
@@ -93,10 +93,10 @@ class NotedTests: XCTestCase {
             
             notedInstance.remove(observer:observer)
         }
-        
+
         receiverStore.append(observer)
         
-        notedInstance.add(observer: observer, filter: TestFilter())
+        notedInstance.add(observer: observer)
         notedInstance.post(note: TestNote.Test)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { 
             expect.fulfill()

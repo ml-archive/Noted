@@ -11,6 +11,6 @@ import Noted
 
 struct TestFilter : NoteFilter {
     func shouldFilter(note: NoteType) -> Bool {
-        return false
+        return true
     }
 }
