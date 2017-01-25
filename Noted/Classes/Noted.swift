@@ -26,7 +26,7 @@ public class Noted {
     
     public init() {}
     
-    public func add(observer: NoteObserver, filter: NoteFilter = PassthroughNoteFilter()) {
+    public func add(observer: NoteObserver) {
         notedQueue.async(group: nil, qos: .default, flags: .barrier) {
             self._observers.add(observer)
         }
