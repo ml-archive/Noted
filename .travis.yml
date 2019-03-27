@@ -9,10 +9,10 @@ env:
   - PROJECT_NAME="Noted.xcodeproj"
   - IOS_FRAMEWORK_SCHEME="Noted"
 
-  - IOS_SDK=iphonesimulator12.2
+  - IOS_SDK=iphonesimulator12.0
 
   matrix:
-  - DESTINATION="OS=12.2,name=iPhone 6S Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=12.0,name=iPhone 6S Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
 
 script:
   - set -o pipefail
