@@ -21,7 +21,7 @@ public class Noted {
         notedQueue.sync {
             values = self._observers.allObjects
         }
-        return values.flatMap({ $0 as? NoteObserver })
+        return values.compactMap({ $0 as? NoteObserver })
     }
     
     public init() {}
