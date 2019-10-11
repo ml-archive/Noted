@@ -33,6 +33,11 @@ github "nodes-ios/Noted" ~> 2.0
 github "nodes-ios/Noted" ~> 1.0
 ~~~
 
+### Cocoapods
+~~~
+pod 'nodes-ios/Noted'
+~~~
+
 ## 💻 Usage
 
 Noted itself is a singleton that you can access from anywhere in your app, and might be especially useful for easily sending messages to your router and/or any other class.
