@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "A minimalistic and effective replacement for NSNotificationCenter, that promotes the observer pattern and keeps weak references to it's observers."
   spec.homepage     = "https://github.com/nodes-ios/Noted"
 
-  spec.author       = { 'Name' => 'chco@nodes.dk' }
+  spec.author       = { "Nodes Agency - iOS" => "ios@nodes.dk" }
   spec.license      = { :type => 'MIT', :file => './LICENSE' }
 
   spec.platform     = :ios
